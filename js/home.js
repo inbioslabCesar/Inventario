@@ -7,7 +7,7 @@ if(!user){
 const logout = document.querySelector('#logout');
 
 logout.addEventListener('click', ()=> {
-  alert('Hasta Pronto!')
+  alert(`Hasta Pronto! ${user.name}`)
   localStorage.removeItem('login_success')
   window.location.href = './index.html'
 })
