@@ -1,7 +1,44 @@
-new DataTable('#example', {
-    layout: {
-        topStart: {
-            buttons: ['copy', 'csv', 'excel', 'pdf', 'print']
-        }
-    }
-});
+import { listProducts } from "./api-fetch.js";
+
+const info = await listProducts();
+
+const cuerpoTabla = document.querySelector("#cuerpo-tabla");
+console.log(cuerpoTabla);
+
+//variables para la paginacion
+
+let limite = 5;
+let desde = 0;
+let paginas = info.length / limite;
+let paginaActiva = 1;
+
+let arreglo = info.slice(desde, limite);
+
+const cargarProductos = () => {
+  cuerpoTabla.innerHTML = "";
+
+  arreglo.map((producto) => {
+    const fila = document.createElement("tr");
+    fila.setAttribute("key", producto.id);
+
+    const contenido = `
+              <th scope="row">${producto.id}</th>
+              <td>${producto.area}</td>
+              <td>${producto.name}</td>
+              <td>${producto.lote}</td>
+              <td>${producto.stock}</td>
+              <td>${producto.ingreso}</td>
+              <td>${producto.vence}</td>
+              <td>
+                  <button class="btn btn-sm btn-primary"><i class="fa-solid fa-pencil"></i></button>
+                  <button class="btn btn-sm btn-danger"><i class="fa-solid fa-trash-can"></i></button>
+              </td>
+
+    `;
+
+    fila.innerHTML = contenido;
+    cuerpoTabla.append(fila);
+  });
+};
+
+cargarProductos();
