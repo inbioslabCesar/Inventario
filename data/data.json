@@ -1,0 +1,72 @@
+[
+    {
+        "id": 1,
+        "area": "bioquimica",
+        "name": "glucosa",
+         "lote": 99999,
+         "stock": 10,
+         "ingreso": "02-05-2025",
+         "vence": "02-05-2026"
+    },
+    {
+        "id": 2,
+        "area": "bioquimica",
+        "name": "colesterol",
+         "lote": 55555,
+         "stock": 5,
+         "ingreso": "02-05-2025",
+         "vence": "02-05-2026"
+    },
+    {
+        "id": 3,
+        "area": "bioquimica",
+        "name": "trigliceridos",
+         "lote": 44444,
+         "stock": 2,
+         "ingreso": "02-05-2025",
+         "vence": "02-05-2026"
+    },{
+        "id": 4,
+        "area": "bioquimica",
+        "name": "acido urico",
+         "lote": 33333,
+         "stock": 6,
+         "ingreso": "02-05-2025",
+         "vence": "02-05-2026"
+    },
+    {
+        "id": 1,
+        "area": "bioquimica",
+        "name": "glucosa",
+         "lote": 99999,
+         "stock": 10,
+         "ingreso": "02-05-2025",
+         "vence": "02-05-2026"
+    },
+    {
+        "id": 2,
+        "area": "bioquimica",
+        "name": "colesterol",
+         "lote": 55555,
+         "stock": 5,
+         "ingreso": "02-05-2025",
+         "vence": "02-05-2026"
+    },
+    {
+        "id": 3,
+        "area": "bioquimica",
+        "name": "trigliceridos",
+         "lote": 44444,
+         "stock": 2,
+         "ingreso": "02-05-2025",
+         "vence": "02-05-2026"
+    },{
+        "id": 4,
+        "area": "bioquimica",
+        "name": "acido urico",
+         "lote": 33333,
+         "stock": 6,
+         "ingreso": "02-05-2025",
+         "vence": "02-05-2026"
+    }
+]
