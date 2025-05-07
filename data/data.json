@@ -35,16 +35,16 @@
          "vence": "02-05-2026"
     },
     {
-        "id": 1,
-        "area": "bioquimica",
-        "name": "glucosa",
-         "lote": 99999,
-         "stock": 10,
+        "id": 5,
+        "area": "hematologia",
+        "name": "laminas porta objeto",
+         "lote": 55555,
+         "stock": 50,
          "ingreso": "02-05-2025",
          "vence": "02-05-2026"
     },
     {
-        "id": 2,
+        "id": 6,
         "area": "bioquimica",
         "name": "colesterol",
          "lote": 55555,
@@ -53,7 +53,7 @@
          "vence": "02-05-2026"
     },
     {
-        "id": 3,
+        "id": 7,
         "area": "bioquimica",
         "name": "trigliceridos",
          "lote": 44444,
@@ -61,11 +61,11 @@
          "ingreso": "02-05-2025",
          "vence": "02-05-2026"
     },{
-        "id": 4,
-        "area": "bioquimica",
-        "name": "acido urico",
-         "lote": 33333,
-         "stock": 6,
+        "id": 8,
+        "area": "banco de sangre",
+        "name": "bolsa de tranfucion",
+         "lote": 77777,
+         "stock": 25,
          "ingreso": "02-05-2025",
          "vence": "02-05-2026"
     }

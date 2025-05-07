@@ -44,39 +44,41 @@
             <nav arial-label="Page navigation example">
               <ul class="pagination">
                 <li class="page-item">
-                  <button class="page-link">
+                  <button class="page-link" onclick="previusPage()">
+                    <span>Anterior</span>
                     <span arial-hidden="true"> &laquo; </span>
                   </button>
                 </li>
                 <div id="items" class="d-flex"></div>
                 <li class="page-item">
-                  <button class="page-link">
+                  <button class="page-link" onclick="nextPage()">
                     <span arial-hidden="true"> &raquo; </span>
+                    <span>Siguiente</span>
                   </button>
                 </li>
               </ul>
             </nav>
           </div>
         </div>
-        <table id="example" class="table table-striped">
-          <caption>
-            Lista de Productos
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Area</th>
-              <th scope="col">Producto</th>
-              <th scope="col">Lote</th>
-              <th scope="col">Stock</th>
-              <th scope="col">Ingreso</th>
-              <th scope="col">Vence</th>
-              <th scope="col">Acción</th>
-            </tr>
-          </thead>
-          <tbody id="cuerpo-tabla"></tbody>
-        </table>
       </div>
+      <table id="example" class="table table-striped">
+        <caption>
+          Lista de Productos
+        </caption>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Area</th>
+            <th scope="col">Producto</th>
+            <th scope="col">Lote</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Ingreso</th>
+            <th scope="col">Vence</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody id="cuerpo-tabla"></tbody>
+      </table>
     </div>
 
     <!-- JQuery -->

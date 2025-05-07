@@ -39,6 +39,51 @@ const cargarProductos = () => {
     fila.innerHTML = contenido;
     cuerpoTabla.append(fila);
   });
+  cargarItemPaginacion();
 };
+
+const cargarItemPaginacion = () => {
+    document.querySelector('#items').innerHTML = '';
+
+    for (let index = 0; index < paginas; index++) {
+        const item = document.createElement('li');
+        item.classList = `page-item ${paginaActiva==index+1 ? "active" : ''}`;
+        const enlace = `<button class="page-link" onclick="pasarPagina(${index})">${index +1}</button>`;
+
+        item.innerHTML = enlace;
+        document.querySelector('#items').append(item)
+        
+    }
+};
+
+const modificarArregloProductos = () => {
+    arreglo = info.slice(desde, limite * paginaActiva);
+        cargarProductos();
+}
+
+window.pasarPagina = (pagina) => {
+    paginaActiva = pagina +1;
+    desde = limite * pagina;
+
+    if(desde <= info.length){
+        modificarArregloProductos();
+    }
+}
+
+window.nextPage = () => {
+    if(paginaActiva < paginas){
+        desde += 5;
+        paginaActiva++;
+        modificarArregloProductos();
+    }
+}
+
+window.previusPage = () => {
+    if(desde > 0){
+        paginaActiva--;
+        desde -= 5;
+        modificarArregloProductos();
+    }
+}
 
 cargarProductos();
