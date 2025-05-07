@@ -5,20 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ALMACEN</title>
 
-    <!-- DataTAble -->
-    <link
-      href="https://cdn.datatables.net/2.3.0/css/dataTables.bootstrap5.min.css"
-      rel="stylesheet"
-      integrity="sha384-xkQqWcEusZ1bIXoKJoItkNbJJ1LG5QwR5InghOwFLsCoEkGcNLYjE0O83wWruaK9"
-      crossorigin="anonymous"
-    />
-    <link
-      href="https://cdn.datatables.net/buttons/3.2.3/css/buttons.bootstrap5.min.css"
-      rel="stylesheet"
-      integrity="sha384-DJhypeLg79qWALC844KORuTtaJcH45J+36wNgzj4d1Kv1vt2PtRuV2eVmdkVmf/U"
-      crossorigin="anonymous"
-    />
-
     <!-- Bootstrap -->
     <link
       rel="stylesheet"
@@ -39,46 +25,98 @@
   <body>
     <div class="container my-5">
       <div class="row">
-        <div class="col-8 offset-2">
-          <div class="d-flex justify-constent-end">
-            <nav arial-label="Page navigation example">
-              <ul class="pagination">
-                <li class="page-item">
-                  <button class="page-link" onclick="previusPage()">
-                    <span>Anterior</span>
-                    <span arial-hidden="true"> &laquo; </span>
-                  </button>
-                </li>
-                <div id="items" class="d-flex"></div>
-                <li class="page-item">
-                  <button class="page-link" onclick="nextPage()">
-                    <span arial-hidden="true"> &raquo; </span>
-                    <span>Siguiente</span>
-                  </button>
-                </li>
-              </ul>
-            </nav>
+        <div class="col">
+          <h1>Administracion de Productos</h1>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 offset-md-3">
+        <h3>Agregar nuevo producto</h3>
+        <form id="formProduct">
+          <div class="row mt-3">
+            <div class="col">
+              <label>Producto</label>
+              <input type="text" class="form-control" id="producto" required />
+            </div>
+            <div class="col">
+              <label>Area</label>
+              <select id="area" class="form-control">
+                <option value="Bioquimica">Bioquimica</option>
+                <option value="Hematologia">Hematologia</option>
+                <option value="Inmunologia">Inmunologia</option>
+              </select>
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col">
+              <label>Lote</label>
+              <input type="text" class="form-control" id="lote" required />
+            </div>
+            <div class="col">
+              <label>Stock</label>
+              <input type="number" class="form-control" id="stock" required />
+            </div>
+          </div>
+          <div class="row mt-3">
+            <div class="col">
+              <label>Ingreso</label>
+              <input type="date" class="form-control" id="ingreso" required />
+            </div>
+            <div class="col">
+              <label>Vence</label>
+              <input type="date" class="form-control" id="vence" required />
+            </div>
+          </div>
+          <div class="mt-3 d-flex justify-content-end">
+            <button class="btn btn-info">Guardar</button>
+          </div>
+        </form>
+      </div>
+      <div class="row ">
+        <div class="col-12 col-md-8 offset-md-2">       
+        <h1>Listado de productos</h1>
+        <table id="example" class="table table-striped">
+          <caption>
+            Lista de Productos
+          </caption>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">Producto</th>
+              <th scope="col">Area</th>
+              <th scope="col">Lote</th>
+              <th scope="col">Stock</th>
+              <th scope="col">Ingreso</th>
+              <th scope="col">Vence</th>
+              <th scope="col">Acción</th>
+            </tr>
+          </thead>
+          <tbody id="cuerpo-tabla"></tbody>
+        </table>
+        <div class="row">
+          <div class="col-8 offset-2">
+            <div class="d-flex justify-content-end">
+              <nav arial-label="Page navigation example">
+                <ul class="pagination">
+                  <li class="page-item">
+                    <button class="page-link" onclick="previusPage()">
+                      <span>Anterior</span>
+                      <span arial-hidden="true"> &laquo; </span>
+                    </button>
+                  </li>
+                  <div id="items" class="d-flex"></div>
+                  <li class="page-item">
+                    <button class="page-link" onclick="nextPage()">
+                      <span arial-hidden="true"> &raquo; </span>
+                      <span>Siguiente</span>
+                    </button>
+                  </li>
+                </ul>
+              </nav>
+            </div>
           </div>
         </div>
       </div>
-      <table id="example" class="table table-striped">
-        <caption>
-          Lista de Productos
-        </caption>
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">Area</th>
-            <th scope="col">Producto</th>
-            <th scope="col">Lote</th>
-            <th scope="col">Stock</th>
-            <th scope="col">Ingreso</th>
-            <th scope="col">Vence</th>
-            <th scope="col">Acción</th>
-          </tr>
-        </thead>
-        <tbody id="cuerpo-tabla"></tbody>
-      </table>
+      </div>
     </div>
 
     <!-- JQuery -->
@@ -87,58 +125,6 @@
       integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
-    ></script>
-
-    <!-- DataTAble -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"
-      integrity="sha384-+mbV2IY1Zk/X1p/nWllGySJSUN8uMs+gUAN10Or95UBH0fpj6GfKgPmgC5EXieXG"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"
-      integrity="sha384-VFQrHzqBh5qiJIU0uGU5CIW3+OWpdGGJM9LBnGbuIH2mkICcFZ7lPd/AAtI7SNf7"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"
-      integrity="sha384-/RlQG9uf0M2vcTw3CX7fbqgbj/h8wKxw7C3zu9/GxcBPRKOEcESxaxufwRXqzq6n"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.datatables.net/2.3.0/js/dataTables.min.js"
-      integrity="sha384-ehaRe3xJ0fffAlDr3p72vNw3wWV01C1/Z19X6s//i6hiF8hee+c+rabqObq8YlOk"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.datatables.net/2.3.0/js/dataTables.bootstrap5.min.js"
-      integrity="sha384-G85lmdZCo2WkHaZ8U1ZceHekzKcg37sFrs4St2+u/r2UtfvSDQmQrkMsEx4Cgv/W"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.datatables.net/buttons/3.2.3/js/dataTables.buttons.min.js"
-      integrity="sha384-zlMvVlfnPFKXDpBlp4qbwVDBLGTxbedBY2ZetEqwXrfWm+DHPvVJ1ZX7xQIBn4bU"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.datatables.net/buttons/3.2.3/js/buttons.bootstrap5.min.js"
-      integrity="sha384-BdedgzbgcQH1hGtNWLD56fSa7LYUCzyRMuDzgr5+9etd1/W7eT0kHDrsADMmx60k"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.datatables.net/buttons/3.2.3/js/buttons.colVis.min.js"
-      integrity="sha384-v0wzF6NECWiQyIain/Wacl6wEYr6NDJRus6qpckumPIngNI9Zo0sDMon5lBh9Np1"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.datatables.net/buttons/3.2.3/js/buttons.html5.min.js"
-      integrity="sha384-+E6fb8f66UPOVDHKlEc1cfguF7DOTQQ70LNUnlbtywZiyoyQWqtrMjfTnWyBlN/Y"
-      crossorigin="anonymous"
-    ></script>
-    <script
-      src="https://cdn.datatables.net/buttons/3.2.3/js/buttons.print.min.js"
-      integrity="sha384-FvTRywo5HrkPlBKFrm2tT8aKxIcI/VU819roC/K/8UrVwrl4XsF3RKRKiCAKWNly"
-      crossorigin="anonymous"
     ></script>
 
     <!-- Bootstrap -->
