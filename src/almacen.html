@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -43,6 +43,9 @@
                 <option value="Bioquimica">Bioquimica</option>
                 <option value="Hematologia">Hematologia</option>
                 <option value="Inmunologia">Inmunologia</option>
+                <option value="Parasitologia">Parasitologia</option>
+                <option value="Uroanalisis">Uroanalisis</option>
+                <option value="Banco de Sangre">Banco de Sangre</option>
               </select>
             </div>
           </div>
@@ -71,61 +74,156 @@
           </div>
         </form>
       </div>
-      <div class="row ">
-        <div class="col-12 col-md-8 offset-md-2">       
-        <h1>Listado de productos</h1>
-        <table id="example" class="table table-striped">
-          <caption>
-            Lista de Productos
-          </caption>
-          <thead>
-            <tr>
-              <th scope="col">#</th>
-              <th scope="col">Producto</th>
-              <th scope="col">Area</th>
-              <th scope="col">Lote</th>
-              <th scope="col">Stock</th>
-              <th scope="col">Ingreso</th>
-              <th scope="col">Vence</th>
-              <th scope="col">Acción</th>
-            </tr>
-          </thead>
-          <tbody id="cuerpo-tabla"></tbody>
-        </table>
-        <div class="row">
-          <div class="col-8 offset-2">
-            <div class="d-flex justify-content-end">
-              <nav arial-label="Page navigation example">
-                <ul class="pagination">
-                  <li class="page-item">
-                    <button class="page-link" onclick="previusPage()">
-                      <span>Anterior</span>
-                      <span arial-hidden="true"> &laquo; </span>
-                    </button>
-                  </li>
-                  <div id="items" class="d-flex"></div>
-                  <li class="page-item">
-                    <button class="page-link" onclick="nextPage()">
-                      <span arial-hidden="true"> &raquo; </span>
-                      <span>Siguiente</span>
-                    </button>
-                  </li>
-                </ul>
-              </nav>
+      <div class="row">
+        <div class="col-12 col-md-8 offset-md-2">
+          <h1>Listado de productos</h1>
+          <table id="example" class="table table-striped">
+            <caption>
+              Lista de Productos
+            </caption>
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Producto</th>
+                <th scope="col">Area</th>
+                <th scope="col">Lote</th>
+                <th scope="col">Stock</th>
+                <th scope="col">Ingreso</th>
+                <th scope="col">Vence</th>
+                <th scope="col">Acción</th>
+              </tr>
+            </thead>
+            <tbody id="cuerpo-tabla"></tbody>
+          </table>
+          <div class="row">
+            <div class="col-8 offset-2">
+              <div class="d-flex justify-content-end">
+                <nav arial-label="Page navigation example">
+                  <ul class="pagination">
+                    <li class="page-item">
+                      <button class="page-link" onclick="previusPage()">
+                        <span>Anterior</span>
+                        <span arial-hidden="true"> &laquo; </span>
+                      </button>
+                    </li>
+                    <div id="items" class="d-flex"></div>
+                    <li class="page-item">
+                      <button class="page-link" onclick="nextPage()">
+                        <span arial-hidden="true"> &raquo; </span>
+                        <span>Siguiente</span>
+                      </button>
+                    </li>
+                  </ul>
+                </nav>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      </div>
     </div>
 
-    <!-- JQuery -->
-    <script
-      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
-      integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    ></script>
+    <!-- Modal Producto -->
+
+    <div
+      class="modal fade"
+      id="modalProduct"
+      tabindex="-1"
+      aria-labelledby="ModalProductLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Actualizar Producto
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="row mt-3">
+                <div class="col">
+                  <label for="producto">Producto</label>
+                  <input
+                    type="text"
+                    name="producto"
+                    class="form-control"
+                    id="productoModal"
+                    required
+                  />
+                </div>
+                <div class="col">
+                  <label for="area">Area</label>
+                  <select
+                    name="area"
+                    id="areaModal"
+                    class="form-control"
+                    required
+                  >
+                    <option value="Bioquimica">Bioquimica</option>
+                    <option value="Hematologia">Hematologia</option>
+                    <option value="Inmunologia">Inmunologia</option>
+                    <option value="Parasitologia">Parasitologia</option>
+                    <option value="Uroanalisis">Uroanalisis</option>
+                    <option value="Banco de Sangre">Banco de Sangre</option>
+                  </select>
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col">
+                  <label>Lote</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="loteModal"
+                    required
+                  />
+                </div>
+                <div class="col">
+                  <label>Stock</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="stockModal"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col">
+                  <label for="ingreso">Ingreso</label>
+                  <input
+                    name="ingreso"
+                    type="text"
+                    class="form-control"
+                    id="ingresoModal"
+                    required
+                  />
+                </div>
+                <div class="col">
+                  <label for="vence">Vence</label>
+                  <input
+                    name="vence"
+                    type="text"
+                    class="form-control"
+                    id="venceModal"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="mt-3 d-flex justify-content-end">
+                <button class="btn btn-info">Actualizar</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- Bootstrap -->
 
