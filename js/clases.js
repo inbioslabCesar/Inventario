@@ -1,7 +1,7 @@
 export class Product {
-    constructor(id, producto, area, lote, stock, ingreso, vence){
+    constructor(id, name, area, lote, stock, ingreso, vence){
         this.id = id;
-        this.producto = producto;
+        this.name = name;
         this.area = area;
         this.lote = lote;
         this.stock = stock;
