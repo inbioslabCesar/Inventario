@@ -1,91 +1,80 @@
-import { listProducts } from "./api-fetch.js";
 import { Product } from "./clases.js";
+import {cargaDeDatos} from "./funciones.js"
 
-const info = await listProducts();
+let datos = [];
 
 const cuerpoTabla = document.querySelector("#cuerpo-tabla");
 const myModal = new bootstrap.Modal(document.getElementById("modalProduct"));
-const modalCrearProductos = new bootstrap.Modal(document.getElementById("modalCrearProductos"));
-
-
 
 let idProductoUpdate = null;
-
-window.crearModalProductos = () => {
-  modalCrearProductos.show();
-
-}
 
 window.mostrarModal = (id) => {
   idProductoUpdate = id;
 
-  let index = info.findIndex((item) => item.id == idProductoUpdate);
+  let index = datos.findIndex((item) => item.id == idProductoUpdate);
 
-  document.querySelector("#productoModal").value = info[index].name;
-  document.querySelector("#areaModal").value = info[index].area;
-  document.querySelector("#loteModal").value = info[index].lote;
-  document.querySelector("#stockModal").value = info[index].stock;
-  document.querySelector("#ingresoModal").value = info[index].ingreso;
-  document.querySelector("#venceModal").value = info[index].vence;
+  document.querySelector("#productoModal").value = datos[index].name;
+  document.querySelector("#areaModal").value = datos[index].area;
+  document.querySelector("#loteModal").value = datos[index].lote;
+  document.querySelector("#stockModal").value = datos[index].stock;
+  document.querySelector("#ingresoModal").value = datos[index].ingreso;
+  document.querySelector("#venceModal").value = datos[index].vence;
 
   myModal.show();
-  
 };
 
 const productUpdate = (event) => {
   event.preventDefault();
-  let index = info.findIndex((item) => item.id == idProductoUpdate);
+  let index = datos.findIndex((item) => item.id == idProductoUpdate);
 
-  info[index].name = document.querySelector("#productoModal").value;
-  info[index].area = document.querySelector("#areaModal").value;
-  info[index].lote = document.querySelector("#loteModal").value;
-  info[index].stock = document.querySelector("#stockModal").value;
-  info[index].ingreso = document.querySelector("#ingresoModal").value;
-  info[index].vence = document.querySelector("#venceModal").value;
-
+  datos[index].name = document.querySelector("#productoModal").value;
+  datos[index].area = document.querySelector("#areaModal").value;
+  datos[index].lote = document.querySelector("#loteModal").value;
+  datos[index].stock = document.querySelector("#stockModal").value;
+  datos[index].ingreso = document.querySelector("#ingresoModal").value;
+  datos[index].vence = document.querySelector("#venceModal").value;
+  
+  localStorage.setItem("datos", JSON.stringify(datos));
   cargarTabla();
   myModal.hide();
-  
 };
-
-
 
 //variables para la paginacion
 
 let limite = 5;
 let desde = 0;
-let paginas = info.length / limite;
+let paginas = datos.length / limite;
 let paginaActiva = 1;
 
-let arreglo = info.slice(desde, limite);
+let arreglo = datos.slice(desde, limite);
 
 const cargarTabla = () => {
+  datos = JSON.parse(localStorage.getItem("datos"));
+
   cuerpoTabla.innerHTML = "";
 
-  info.map((producto) => {
+  datos.map((producto) => {
     const fila = document.createElement("tr");
-    fila.setAttribute("key", producto.id);
-
+    
     const celdas = `
-              <th scope="row">${producto.id}</th>
-              <td>${producto.name}</td>
-              <td>${producto.area}</td>
-              <td>${producto.lote}</td>
-              <td>${producto.stock}</td>
-              <td>${producto.ingreso}</td>
-              <td>${producto.vence}</td>
-              <td>
-                  <button class="btn btn-sm btn-primary" onclick="mostrarModal(${producto.id})"><i class="fa-solid fa-pencil"></i></button>
-                  <button class="btn btn-sm btn-danger" onclick="borrarProduct(${producto.id})"><i class="fa-solid fa-trash-can"></i></button>
-              </td>
-
+    <th>${producto.id}</th>
+    <td>${producto.name}</td>
+    <td>${producto.area}</td>
+    <td>${producto.lote}</td>
+    <td>${producto.stock}</td>
+    <td>${producto.ingreso}</td>
+    <td>${producto.vence}</td>
+    <td>
+    <button class="btn btn-sm btn-primary" onclick="mostrarModal(${producto.id})"><i class="fa-solid fa-pencil"></i></button>
+    <button class="btn btn-sm btn-danger" onclick="borrarProduct(${producto.id})"><i class="fa-solid fa-trash-can"></i></button>
+    </td>
+    
     `;
-
+    
     fila.innerHTML = celdas;
     cuerpoTabla.append(fila);
   });
   cargarItemPaginacion();
-  
 };
 
 const cargarItemPaginacion = () => {
@@ -104,7 +93,7 @@ const cargarItemPaginacion = () => {
 };
 
 const modificarArregloProductos = () => {
-  arreglo = info.slice(desde, limite * paginaActiva);
+  arreglo = datos.slice(desde, limite * paginaActiva);
   cargarTabla();
 };
 
@@ -112,7 +101,7 @@ window.pasarPagina = (pagina) => {
   paginaActiva = pagina + 1;
   desde = limite * pagina;
 
-  if (desde <= info.length) {
+  if (desde <= datos.length) {
     modificarArregloProductos();
   }
 };
@@ -137,7 +126,8 @@ window.previusPage = () => {
 
 const agregarProduct = (event) => {
   event.preventDefault();
-  let id = info.at(-1).id + 1;
+
+  let id = datos.at(-1).id + 1;
   let name = document.querySelector("#producto").value;
   let area = document.querySelector("#area").value;
   let lote = document.querySelector("#lote").value;
@@ -145,28 +135,29 @@ const agregarProduct = (event) => {
   let ingreso = document.querySelector("#ingreso").value;
   let vence = document.querySelector("#vence").value;
 
-  info.push(new Product(id, name, area, lote, stock, ingreso, vence));
+  datos.push(new Product(id, name, area, lote, stock, ingreso, vence));
   document.querySelector("#formProduct").reset();
+  localStorage.setItem("datos", JSON.stringify(datos));
   cargarTabla();
-  modalCrearProductos.hide();
- 
 };
 
 window.borrarProduct = (id) => {
-  let index = info.findIndex((item) => item.id == id);
+  let index = datos.findIndex((item) => item.id == id);
 
   let validar = confirm(
-    `Está seguro/a que quiere eliminar el producto ${info[index].name}?`
+    `Está seguro/a que quiere eliminar el producto ${datos[index].name}?`
   );
 
   if (validar) {
-    info.splice(index, 1);
+    datos.splice(index, 1);    
+    localStorage.setItem("datos", JSON.stringify(datos));
     cargarTabla();
   }
 };
 
-cargarTabla();
+cargaDeDatos();
 
+cargarTabla();
 
 document
   .querySelector("#formProduct")
