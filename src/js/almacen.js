@@ -5,8 +5,16 @@ const info = await listProducts();
 
 const cuerpoTabla = document.querySelector("#cuerpo-tabla");
 const myModal = new bootstrap.Modal(document.getElementById("modalProduct"));
+const modalCrearProductos = new bootstrap.Modal(document.getElementById("modalCrearProductos"));
+
+
 
 let idProductoUpdate = null;
+
+window.crearModalProductos = () => {
+  modalCrearProductos.show();
+
+}
 
 window.mostrarModal = (id) => {
   idProductoUpdate = id;
@@ -21,6 +29,7 @@ window.mostrarModal = (id) => {
   document.querySelector("#venceModal").value = info[index].vence;
 
   myModal.show();
+  
 };
 
 const productUpdate = (event) => {
@@ -36,7 +45,10 @@ const productUpdate = (event) => {
 
   cargarTabla();
   myModal.hide();
+  
 };
+
+
 
 //variables para la paginacion
 
@@ -73,6 +85,7 @@ const cargarTabla = () => {
     cuerpoTabla.append(fila);
   });
   cargarItemPaginacion();
+  
 };
 
 const cargarItemPaginacion = () => {
@@ -135,6 +148,8 @@ const agregarProduct = (event) => {
   info.push(new Product(id, name, area, lote, stock, ingreso, vence));
   document.querySelector("#formProduct").reset();
   cargarTabla();
+  modalCrearProductos.hide();
+ 
 };
 
 window.borrarProduct = (id) => {
@@ -151,6 +166,7 @@ window.borrarProduct = (id) => {
 };
 
 cargarTabla();
+
 
 document
   .querySelector("#formProduct")
